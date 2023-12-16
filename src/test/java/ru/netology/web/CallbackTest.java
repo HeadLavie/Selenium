@@ -48,19 +48,19 @@ class CallbackTest {
         form.findElement(By.cssSelector("[data-test-id=agreement]")).click();
         form.findElement(By.className("button_theme_alfa-on-white")).click();
         String text = driver.findElement(By.cssSelector("[data-test-id=order-success]")).getText();
-        assertEquals(" Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.", text.trim());
+        assertEquals("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.", text.trim());
     }
 
     @Test
     void shouldTestV2() {
         driver.get("http://localhost:7777/");
         WebElement form = driver.findElement(By.className("form_theme_alfa-on-white"));
-        form.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("");
+        form.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Nick");
         form.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+11122233345");
         form.findElement(By.cssSelector("[data-test-id=agreement]")).click();
         form.findElement(By.className("button_theme_alfa-on-white")).click();
-        String text = driver.findElement(By.cssSelector("[data-test-id=name] input__sub")).getText();
-        assertEquals("Поле обязательно для заполнения", text);
+        String text = driver.findElement(By.cssSelector("[data-test-id=name] .input__sub")).getText();
+        assertEquals("Имя и Фамилия указаные неверно. Допустимы только русские буквы, пробелы и дефисы.", text.trim());
     }
 
 }
