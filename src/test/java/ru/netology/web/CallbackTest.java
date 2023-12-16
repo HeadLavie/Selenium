@@ -1,19 +1,19 @@
 package ru.netology.web;
 
-        import io.github.bonigarcia.wdm.WebDriverManager;
-        import org.junit.jupiter.api.AfterEach;
-        import org.junit.jupiter.api.BeforeAll;
-        import org.junit.jupiter.api.BeforeEach;
-        import org.junit.jupiter.api.Test;
-        import org.openqa.selenium.By;
-        import org.openqa.selenium.WebDriver;
-        import org.openqa.selenium.WebElement;
-        import org.openqa.selenium.chrome.ChromeDriver;
-        import org.openqa.selenium.chrome.ChromeOptions;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
-        import java.util.List;
+import java.util.List;
 
-        import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CallbackTest {
     private WebDriver driver;
@@ -42,6 +42,25 @@ class CallbackTest {
     @Test
     void shouldTestV1() {
         driver.get("http://localhost:7777/");
+        WebElement form = driver.findElement(By.className("form_theme_alfa-on-white"));
+        form.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Надежда");
+        form.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+11122233345");
+        form.findElement(By.cssSelector("[data-test-id=agreement]")).click();
+        form.findElement(By.className("button_theme_alfa-on-white")).click();
+        String text = driver.findElement(By.cssSelector("[data-test-id=order-success]")).getText();
+        assertEquals(" Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.", text.trim());
+    }
+
+    @Test
+    void shouldTestV2() {
+        driver.get("http://localhost:7777/");
+        WebElement form = driver.findElement(By.className("form_theme_alfa-on-white"));
+        form.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("");
+        form.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+11122233345");
+        form.findElement(By.cssSelector("[data-test-id=agreement]")).click();
+        form.findElement(By.className("button_theme_alfa-on-white")).click();
+        String text = driver.findElement(By.cssSelector("[data-test-id=name] input__sub")).getText();
+        assertEquals("Поле обязательно для заполнения", text);
     }
 
 }
