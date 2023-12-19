@@ -45,8 +45,6 @@ class CallbackTest {
 
     @Test
     void shouldTestV1() throws InterruptedException {
-        driver.get("http://localhost:7777/");
-        Thread.sleep(2000);
         List<WebElement> elements = driver.findElements(By.className("input__control"));
         elements.get(0).sendKeys("Надежда");
         elements.get(1).sendKeys("+11122233345");
@@ -58,7 +56,6 @@ class CallbackTest {
 
     @Test
     void shouldTestV2() throws InterruptedException {
-        driver.get("http://localhost:7777/");
         List<WebElement> elements = driver.findElements(By.className("input__control"));
         elements.get(0).sendKeys("Надежда Карпенко");
         elements.get(1).sendKeys("+11122233345");
@@ -70,7 +67,6 @@ class CallbackTest {
 
     @Test
     void shouldTestV3() {
-        driver.get("http://localhost:7777/");
         List<WebElement> elements = driver.findElements(By.className("input__control"));
         elements.get(0).sendKeys("Nick");
         elements.get(1).sendKeys("+11122233345");
